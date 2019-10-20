@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boton.setOnClickListener(this);
         Button boton2 = findViewById(R.id.button2);
         boton2.setOnClickListener(this);
+        Button btntarea1 = findViewById(R.id.tarea1);
+        btntarea1.setOnClickListener(this);
         editText = findViewById(R.id.textView);
     }
 
@@ -26,11 +28,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String mensaje = editText.getText().toString();
         if (view.getId() == R.id.button) {
             Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
-        } else if (view.getId() == R.id.button2) {
+        }else if (view.getId() == R.id.button2) {
             Intent intent = new Intent(this,SecondActivity.class);
             intent.putExtra("textmsg",mensaje);
             startActivity(intent);
+        }else if(view.getId() == R.id.tarea1){
+            openActivity(Tarea1.class);
         }
 
+    }
+
+    private void openActivity(Class clase ){
+        Intent intent = new Intent(this,clase);
+        startActivity(intent);
     }
 }
