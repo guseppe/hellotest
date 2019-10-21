@@ -7,6 +7,7 @@ import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -40,16 +41,29 @@ public class Tarea1 extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnEnviar) {
-            //Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
-            //Intent intent = new Intent(this,SecondActivity.class);
-            //intent.putExtra("textmsg",mensaje);
-            //startActivity(intent);
             if(camposValidos() == true){
-                Toast.makeText(this, "Enviando Data...", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Enviando Data...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this,Tarea1Activity2.class);
+                String mensaje = contruirMensaje();
+                intent.putExtra("textmsg",mensaje);
+                startActivity(intent);
             }
         }else if (v.getId() == R.id.btnLimpiar) {
             limpiarCampos();
         }
+    }
+
+    private String contruirMensaje() {
+        String mensaje = "";
+        RadioButton botonSexoSeleccionado = findViewById(sexRadioGroup.getCheckedRadioButtonId());
+        mensaje += "Nombre: "+txtNombre.getText()+"\n"
+                  +"Apellido: "+txtApellido.getText()+"\n"
+                  +"Edad: "+txtEdad.getText()+"\n"
+                  +"Nacimiento: "+txtNacimiento.getText()+"\n"
+                  +"Sexo: "+botonSexoSeleccionado.getText()+"\n"
+                  +"Estado: "+estadoSpinner.getSelectedItem()+"\n"
+                  +"Email: "+txtCorreo.getText();
+        return mensaje;
     }
 
     private boolean camposValidos() {
